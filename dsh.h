@@ -9,3 +9,8 @@
 #define HISTORY_LEN 100
 
 // TODO: Your function prototypes below
+void runCmd(char *const argv[], int background);
+char *parsePath(char *cmd);
+void motd();
+int parseCmd(char *input, char *array[]);
+void dshCd(char str[]);
