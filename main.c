@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		fgets(cmdline, MAXBUF, stdin);
-		makeHistory(history, numCmd, cmdline);
+		// makeHistory(history, numCmd, cmdline);
 		numCmd++;
 		background = parseCmd(cmdline, args);
 		switch (chkBuiltin(args[0]))
