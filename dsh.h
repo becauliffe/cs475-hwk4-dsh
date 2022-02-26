@@ -14,3 +14,4 @@ char *parsePath(char *cmd);
 void motd();
 int parseCmd(char *input, char *array[]);
 void dshCd(char str[]);
+void makeHistory(char *history[], int numCmd, char cmdline[]);

@@ -15,18 +15,19 @@
 int absolute(char *path[]);
 int main(int argc, char **argv)
 {
+	char *history[HISTORY_LEN];
 	motd();
 	char cmdline[MAXBUF]; // stores user input from commmand line
-	// char *test[] = {"/bin/ls", "-a", NULL};
-	// runCmd(test);
-	// printf("%s\n", parsePath("ls"));
-	// strcpy(cmdline, "ls -a");
 	char *args[MAXBUF];
 	int background;
 	char buf[1000];
+	int numCmd = 0;
+
 	while (1)
 	{
 		fgets(cmdline, MAXBUF, stdin);
+		makeHistory(history, numCmd, cmdline);
+		numCmd++;
 		background = parseCmd(cmdline, args);
 		switch (chkBuiltin(args[0]))
 		{
@@ -34,7 +35,12 @@ int main(int argc, char **argv)
 			return 0;
 
 		case CMD_HIST:
-		// do hist thing
+			// printf("2 %s\n", history[0]);
+			for (int i = 0; i < numCmd; i++)
+			{
+				printf("%d %s\n", i + 1, history[i]);
+			}
+			break;
 		case CMD_CD:
 			dshCd(args[1]);
 			break;
