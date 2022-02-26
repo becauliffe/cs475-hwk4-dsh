@@ -141,16 +141,3 @@ void dshCd(char str[])
     }
     printf("%s\n", path);
 }
-void makeHistory(char *history[], int numCmd, char cmdline[])
-{
-    if (numCmd < HISTORY_LEN)
-    {
-        char *temp; //= (char *)malloc(100 * sizeof(char));
-        // strcpy(temp, cmdline);
-        temp = cmdline;
-        // printf("temp is %s\n", temp);
-
-        history[numCmd] = temp;
-        free(temp);
-    }
-}
