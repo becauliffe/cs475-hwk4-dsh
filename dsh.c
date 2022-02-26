@@ -41,7 +41,7 @@ void runCmd(char *const argv[], int background)
     if (child == 0)
     {
         execv(argv[0], argv);
-        printf("exec failed\n");
+        printf("Improper Path\n");
         exit(-1);
     }
     else if (background == 0)

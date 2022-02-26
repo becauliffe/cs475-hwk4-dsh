@@ -28,38 +28,48 @@ int main(int argc, char **argv)
 		fgets(cmdline, MAXBUF, stdin);
 		history[numCmd++] = strdup(cmdline);
 		background = parseCmd(cmdline, args);
-		switch (chkBuiltin(args[0]))
+		if (hasPath(args[0]))
 		{
-		case CMD_EXIT:
-			return 0;
+			runCmd(args, background);
+		}
+		else
+		{
+			switch (chkBuiltin(args[0]))
+			{
+			case CMD_EXIT:
+				return 0;
 
-		case CMD_HIST:
-			// printf("2 %s\n", history[0]);
-			for (int i = 0; i < numCmd; i++)
-			{
-				printf("%d %s\n", i + 1, history[i]);
+			case CMD_HIST:
+				// printf("2 %s\n", history[0]);
+				for (int i = 0; i < numCmd; i++)
+				{
+					printf("%d %s\n", i + 1, history[i]);
+				}
+				break;
+			case CMD_CD:
+				if (args[1] != NULL)
+				{
+					dshCd(args[1]);
+				}
+				break;
+			case CMD_ECHO:
+				break;
+			case CMD_PWD:
+				printf("%s\n", getcwd(buf, 1000));
+				break;
+			case CMD_EXT:
+				// if(hasPath(args[0]))
+				args[0] = parsePath(args[0]);
+				if (args[0] != NULL)
+				{
+					runCmd(args, background);
+				}
+				else
+				{
+					printf("cmd not found\n");
+				}
+				break;
 			}
-			break;
-		case CMD_CD:
-			dshCd(args[1]);
-			break;
-		case CMD_ECHO:
-			break;
-		case CMD_PWD:
-			printf("%s\n", getcwd(buf, 1000));
-			break;
-		case CMD_EXT:
-			// if(hasPath(args[0]))
-			args[0] = parsePath(args[0]);
-			if (args[0] != NULL)
-			{
-				runCmd(args, background);
-			}
-			else
-			{
-				printf("cmd not found\n");
-			}
-			break;
 		}
 	}
 	return 0;
