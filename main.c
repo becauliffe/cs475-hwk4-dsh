@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 
 	while (1)
 	{
+		printf("dsh> ");
 		fgets(cmdline, MAXBUF, stdin);
 		history[numCmd++] = strdup(cmdline);
 		background = parseCmd(cmdline, args);
@@ -74,34 +75,3 @@ int main(int argc, char **argv)
 	}
 	return 0;
 }
-
-// int absolute(char *path[])
-// {
-// 	if (access(path[0], F_OK | X_OK) == 0)
-// 	{
-
-// 		runCmd(path, 0);
-// 	}
-// 	else
-// 	{
-// 		printf("failed\n");
-// 	}
-// 	return 0;
-// }
-
-// int helper()
-// {
-// 	return 0;
-// getInput()
-// if hasPath {
-// checkPath()
-// runcmd()
-// helper
-// return 0
-// }
-// else{
-// strtok($PATH,':')
-// }
-// if (isBuiltin()) {helper	return 0}
-//
-//}
