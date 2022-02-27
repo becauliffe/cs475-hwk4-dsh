@@ -17,7 +17,9 @@
 #include <string.h>
 #include "builtins.h"
 
-// TODO: Your function definitions (declarations in dsh.h)
+/**
+ *motd prints the message of the day if there is one
+ **/
 void motd()
 {
     FILE *motd = fopen(".dsh_motd", "r");
@@ -35,6 +37,11 @@ void motd()
     printf("\n");
     fclose(motd);
 }
+/**
+ * runCmd executes the function
+ * @param argv the array of the path and args
+ * @param background whether it runs in foreground or background
+ **/
 void runCmd(char *const argv[], int background)
 {
     pid_t child = fork();
@@ -50,7 +57,11 @@ void runCmd(char *const argv[], int background)
         waitpid(child, &status, 0);
     }
 }
-
+/**
+ * has path tells whether it has the absolute path
+ * @param str the cmd line
+ * @return
+ **/
 int hasPath(char *str)
 {
     if (str[0] == '/')
@@ -59,11 +70,16 @@ int hasPath(char *str)
     }
     return 0;
 }
-
+/**
+ *parseCmd separates the cmdline into pieces in an array
+ also sees if there is an & for background
+ @param input the cmd line
+ @param array the array of the cmdline pieces
+ @return 1 for foreground 0 for background
+ **/
 int parseCmd(char *input, char *array[])
 {
     int background = 0;
-
     int lastChar = strlen(input) - 1;
     while (input[lastChar] == '\n')
     {
@@ -128,7 +144,10 @@ char *parsePath(char *cmd)
 
     return NULL;
 }
-
+/**
+ *dshCd changes the directory
+ *@param str the path to change to
+ **/
 void dshCd(char str[])
 {
     char buf[1000];
