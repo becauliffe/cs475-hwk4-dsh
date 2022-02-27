@@ -24,7 +24,7 @@ void motd()
 {
     FILE *motd = fopen(".dsh_motd", "r");
     int c;
-    fopen("file.txt", "r");
+    // fopen("file.txt", "r");
     while (1)
     {
         c = fgetc(motd);
